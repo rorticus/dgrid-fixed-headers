@@ -4,11 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-	"serve": "./node_modules/.bin/http-server -c-1 -o"
+    "serve": "./node_modules/.bin/http-server -c-1 -o"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "httpserver": "^0.2.0"
+  },
+  "dependencies": {
+    "dgrid": "^1.1.0",
+    "dojo": "^1.12.2"
   }
 }
