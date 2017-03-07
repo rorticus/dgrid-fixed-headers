@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>dgrid fixed headers</title>
+	<link rel="stylesheet" href="../node_modules/dgrid/css/dgrid.css">
+	<style type="text/css">
+		.padding {
+			margin-top: 1000px;
+		}
+
+		.dgrid-header-row .dgrid-cell {
+			padding: 16px;
+		}
+
+		#grid .dgrid-scroller .dgrid-cell {
+			padding: 16px;
+		}
+
+		#grid .dgrid-header-row {
+			background-color: red;
+		}
+
+		#grid2 .dgrid-header-row {
+			background-color: lightgreen;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="grid"></div>
+	<div class="padding"></div>
+	<div id="grid2"></div>
+	<div class="padding"></div>
+
+	<script src="../node_modules/dojo/dojo.js"></script>
+	<script>
+		require(['dgrid/Grid', 'dojo/domReady!'], function (Grid) {
+			var data = [];
+			for (var i = 0; i < 200; i++) {
+				data.push({
+					first: 'First ' + i,
+					last: 'Last ' + i
+				});
+			}
+
+			var grid = new Grid({
+				columns: {
+					first: 'First Name',
+					last: 'Last Name'
+				},
+				className: 'dgrid-autoheight'
+			}, 'grid');
+
+			grid.renderArray(data);
+			grid.startup();
+
+			var grid2 = new Grid({
+				columns: {
+					first: 'First Name',
+					last: 'Last Name'
+				},
+				className: 'dgrid-autoheight'
+			}, 'grid2');
+
+			grid2.renderArray(data);
+			grid2.startup();
+
+			function applyFixedHeaders(grid) {
+				var headerHeight = grid.headerNode.offsetHeight;
+
+				window.addEventListener('scroll', function () {
+					var gridTop = grid.domNode.offsetTop;
+					var gridHeight = grid.domNode.offsetHeight;
+					var scrolledTop = gridTop - document.body.scrollTop;
+					var gridBottom = gridTop + gridHeight;
+
+					var lastRow = grid.contentNode.querySelector('.dgrid-row:last-child');
+					var lastRowHeight = lastRow.offsetHeight;
+
+					if (scrolledTop < 0 && gridBottom - headerHeight - lastRowHeight - document.body.scrollTop > 0) {
+						grid.headerNode.style.display = 'none';
+						grid.headerNode.style.top = document.body.scrollTop - gridTop - 1 + 'px';
+						grid.headerNode.style.zIndex = 1000;
+						grid.headerNode.style.display = 'block';
+					} else {
+						grid.headerNode.style.top = '';
+					}
+				});
+			}
+
+			applyFixedHeaders(grid);
+			applyFixedHeaders(grid2);
+		});
+	</script>
+</body>
+
+</html>

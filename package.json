@@ -1,0 +1,14 @@
+{
+  "name": "dgrid-fixed-headers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+	"serve": "./node_modules/.bin/http-server -c-1 -o"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "httpserver": "^0.2.0"
+  }
+}
