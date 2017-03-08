@@ -10,13 +10,13 @@ Clone this repository and install the dependencies,
 $ npm install
 ```
 
-Starting the project will open up a web browser to `http://localhost:8080`,
+Starting the project will open up a web server,
 
 ```bash
 $ npm run serve
 ```
 
-Navigate to the `src` directory and you should see a grid with red headers and a grid with green headers. Scrolling down the page will scroll the headers with the grids.
+Open up http://localhost:8080 in your browser and you should see a grid with red headers and a grid with green headers. Scrolling down the page will scroll the headers with the grids.
 
 ## How it Works
 
